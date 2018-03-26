@@ -1,7 +1,13 @@
 package com.edensia.jasper.sample;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -21,24 +27,32 @@ public class App
 {
     // TODO à positionner dans un fichier properties
 	// RESOURCES_PATH est le chemin d'accès aux images utilisées dans le rapport (logo, coche...)
-	static String DEVIS_JASPER_FILENAME = "C:\\eclipse-workspaces\\infodb-jasper-training\\DevisLightAMDM\\DevisLight.jrxml";
-	static String RESOURCES_PATH = "C:\\eclipse-workspaces\\infodb-jasper-training\\DevisLightAMDM\\resources\\";
-	static String DEVIS_PDF_FILENAME = "C:\\Users\\geral\\Desktop\\classic.pdf";
+	static String DEVIS_JASPER_FILENAME = "C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\DevisLight.jrxml";
+	static String DEVIS_EXPORT_PATH = "C:\\report\\";
+	static String JRXML_RESOURCES_PATH = "C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\resources\\";
 	
 	public static void main( String[] args )
     {
         try {
+        	// Récupération du devis au format JSON
+        	ObjectMapper mapper = new ObjectMapper();
+        	Devis devis = mapper.readValue(new File(DEVIS_EXPORT_PATH+args[0]+".json"), Devis.class);        	        	
+        	
         	// Création de la datasource pour le rapport Jasper
         	// La collection de devis (dans notre cas, un seul devis) est fournie en paramètre
-        	JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(DevisFactory.generateCollection());
+        	Collection<Devis> collectionDevis = new LinkedList<Devis>();
+        	collectionDevis.add(devis);
+        	JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(collectionDevis/*DevisFactory.generateCollection()*/);
         	
         	// Chargement et compilation du rapport
+            System.out.println("DEVIS_JASPER_FILENAME = "+DEVIS_JASPER_FILENAME);
             JasperDesign jasperDesign = JRXmlLoader.load(DEVIS_JASPER_FILENAME);
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
             // Paramètres à envoyer au rapport (vide dans notre cas)
+            System.out.println("JRXML_RESOURCES_PATH = "+JRXML_RESOURCES_PATH);
             Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("ResourcesPath", RESOURCES_PATH);
+            parameters.put("ResourcesPath", JRXML_RESOURCES_PATH);
 
             // Execution du rapport
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, datasource);
@@ -47,11 +61,10 @@ public class App
   	      	jasperPrint.getPages().remove(1);
 
             // Création du rapport au format PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, DEVIS_PDF_FILENAME);
-        } catch (JRException e) {
-
+            JasperExportManager.exportReportToPdfFile(jasperPrint, DEVIS_EXPORT_PATH+args[0]+".pdf");
+        } catch (JRException | IOException e) {
             e.printStackTrace();
-        }
+        } 
     }
 
 }

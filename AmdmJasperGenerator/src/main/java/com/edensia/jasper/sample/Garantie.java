@@ -1,24 +1,27 @@
-/**
- * 
- */
 package com.edensia.jasper.sample;
 
-/**
- * @author geral
- *
- */
 public class Garantie {
+
+	String code;
 	String title;
 	String description;
 	
-	/**
-	 * @param title
-	 * @param description
-	 */
+	public Garantie() {
+		
+	}
+	
 	public Garantie(String title, String description) {
 		super();
 		this.title = title;
 		this.description = description;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getTitle() {
@@ -36,4 +39,5 @@ public class Garantie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }

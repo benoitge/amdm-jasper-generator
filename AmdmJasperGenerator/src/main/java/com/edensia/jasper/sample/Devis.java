@@ -1,63 +1,56 @@
-/**
- * 
- */
 package com.edensia.jasper.sample;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- * @author geral
- *
- */
-public class Devis {
-	
-	// informations g�n�rales sur le devis
+public class Devis implements Serializable {
+
+	private static final long serialVersionUID = 558483202938452810L;
+
+	// informations générales sur le devis
 	Date dateDevis;
 	String reference;
-	
-	// Information Prospect
+
+	// Information prospect
 	String prenom;
 	String nom;
-	
-	// Experience Prospect
+	String codePrescripteur;
+
+	// Experience prospect
 	Double crmMoto;
 	Integer nbAccidentsRespMoto;
 	Integer nbAnneesAssuranceMoto;
 	Double crmAuto;
 	Integer nbAccidentsRespAuto;
 	Integer nbAnneesAssuranceAuto;
-	
+
 	// Vehicule
 	Date dateMEC;
 	String marque;
 	String cylindree;
 	String modele;
 	String appellation;
-	
-	// Usage
 	String usageVehicule;
 	String cpLieuGarage;
 	String villeLieuGarage;
-	
+
 	// Formule choisie
 	String libelleFormule;
 	String codeFormule;
 	Double tarifAnnuel;
 	Double tarifMensuel;
-	
+
 	// Garanties
 	Collection<Garantie> garantiesIncluses;
 	Collection<Garantie> garantiesOptionnellesSelectionnees;
 	Collection<Garantie> garantiesComplementaires;
 
-	/**
-	 * @param reference
-	 * @param prenom
-	 * @param nom
-	 */
 	public Devis() {
-		super();
+		garantiesIncluses = new ArrayList<>();
+		garantiesOptionnellesSelectionnees = new ArrayList<>();
+		garantiesComplementaires = new ArrayList<>();
 	}
 
 	public String getReference() {
@@ -82,6 +75,14 @@ public class Devis {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getCodePrescripteur() {
+		return codePrescripteur;
+	}
+
+	public void setCodePrescripteur(String codePrescripteur) {
+		this.codePrescripteur = codePrescripteur;
 	}
 
 	public String getMarque() {
@@ -236,46 +237,72 @@ public class Devis {
 		this.tarifMensuel = tarifMensuel;
 	}
 
-	/**
-	 * @return the garantiesIncluses
-	 */
 	public Collection<Garantie> getGarantiesIncluses() {
 		return garantiesIncluses;
 	}
 
-	/**
-	 * @param garantiesIncluses the garantiesIncluses to set
-	 */
 	public void setGarantiesIncluses(Collection<Garantie> garantiesIncluses) {
 		this.garantiesIncluses = garantiesIncluses;
 	}
 
-	/**
-	 * @return the garantiesOptionnellesSelectionnees
-	 */
+	public void addGarantieIncluse(Garantie garantie) {
+		this.garantiesIncluses.add(garantie);
+	}
+
 	public Collection<Garantie> getGarantiesOptionnellesSelectionnees() {
 		return garantiesOptionnellesSelectionnees;
 	}
 
-	/**
-	 * @param garantiesOptionnellesSelectionnees the garantiesOptionnellesSelectionnees to set
-	 */
 	public void setGarantiesOptionnellesSelectionnees(Collection<Garantie> garantiesOptionnellesSelectionnees) {
 		this.garantiesOptionnellesSelectionnees = garantiesOptionnellesSelectionnees;
 	}
 
-	/**
-	 * @return the garantiesComplementaires
-	 */
+	public void addGarantieOptionnelleSelectionnee(Garantie garantie) {
+		this.garantiesOptionnellesSelectionnees.add(garantie);
+	}
+
 	public Collection<Garantie> getGarantiesComplementaires() {
 		return garantiesComplementaires;
 	}
 
-	/**
-	 * @param garantiesComplementaires the garantiesComplementaires to set
-	 */
 	public void setGarantiesComplementaires(Collection<Garantie> garantiesComplementaires) {
 		this.garantiesComplementaires = garantiesComplementaires;
+	}
+
+	public void addGarantieComplementaire(Garantie garantie) {
+		this.garantiesComplementaires.add(garantie);
+	}
+
+	@Override
+	public String toString() {
+		return "Devis :"
+				+ "\n dateDevis :  " + dateDevis 
+				+ ",\n  reference :  " + reference 
+				+ ",\n  prenom :  " + prenom 
+				+ ",\n  nom :  " + nom
+				+ ",\n  codePrescripteur :  " + codePrescripteur 
+				+ ",\n  crmMoto :  " + crmMoto 
+				+ ",\n  nbAccidentsRespMoto :  " + nbAccidentsRespMoto 
+				+ ",\n  nbAnneesAssuranceMoto="  + nbAnneesAssuranceMoto 
+				+ ",\n  crmAuto :  " + crmAuto
+				+ ",\n  nbAccidentsRespAuto :  " + nbAccidentsRespAuto 
+				+ ",\n  nbAnneesAssuranceAuto :  " + nbAnneesAssuranceAuto
+				+ ",\n  dateMEC :  " + dateMEC 
+				+ ",\n  marque :  " + marque 
+				+ ",\n  cylindree :  " + cylindree 
+				+ ",\n  modele :  " + modele
+				+ ",\n  appellation :  " + appellation 
+				+ ",\n  usageVehicule :  " + usageVehicule 
+				+ ",\n  cpLieuGarage :  " + cpLieuGarage
+				+ ",\n  villeLieuGarage :  " + villeLieuGarage 
+				+ ",\n  libelleFormule :  " + libelleFormule 
+				+ ",\n  codeFormule :  " + codeFormule 
+				+ ",\n  tarifAnnuel :  " + tarifAnnuel 
+				+ ",\n  tarifMensuel :  " + tarifMensuel
+				+ ",\n  garantiesIncluses :  " + garantiesIncluses 
+				+ ",\n  garantiesOptionnellesSelectionnees :  " + garantiesOptionnellesSelectionnees 
+				+ ",\n  garantiesComplementaires :  " + garantiesComplementaires 
+				+ "]";
 	}
 
 }
