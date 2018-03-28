@@ -12,6 +12,7 @@ public class Devis implements Serializable {
 	// informations générales sur le devis
 	Date dateDevis;
 	String reference;
+	Integer version;
 
 	// Information prospect
 	String prenom;
@@ -59,6 +60,14 @@ public class Devis implements Serializable {
 
 	public void setReference(String reference) {
 		this.reference = reference;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	public String getPrenom() {

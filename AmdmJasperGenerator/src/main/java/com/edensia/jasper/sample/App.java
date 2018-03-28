@@ -25,15 +25,16 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
  */
 public class App 
 {
-    // TODO à positionner dans un fichier properties
-	// RESOURCES_PATH est le chemin d'accès aux images utilisées dans le rapport (logo, coche...)
-	static String DEVIS_JASPER_FILENAME = "C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\DevisLight.jrxml";
-	static String DEVIS_EXPORT_PATH = "C:\\report\\";
-	static String JRXML_RESOURCES_PATH = "C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\resources\\";
 	
 	public static void main( String[] args )
     {
-        try {
+         
+		// RESOURCES_PATH est le chemin d'accès aux images utilisées dans le rapport (logo, coche...)
+		String DEVIS_JASPER_FILENAME = args[1];/*"C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\DevisLight.jrxml";*/
+		String DEVIS_EXPORT_PATH = args[2];/*"C:\\report\\";*/
+		String JRXML_RESOURCES_PATH = args[3];/*"C:\\Users\\gerald benoit\\git\\amdm-jasperreports\\DevisLightAMDM\\resources\\";*/
+		
+		try {
         	// Récupération du devis au format JSON
         	ObjectMapper mapper = new ObjectMapper();
         	Devis devis = mapper.readValue(new File(DEVIS_EXPORT_PATH+args[0]+".json"), Devis.class);        	        	
