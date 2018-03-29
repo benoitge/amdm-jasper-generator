@@ -59,7 +59,7 @@ public class App
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, datasource);
             
             // Correctif permettant de supprimer la deuxième page (page blanche)
-  	      	jasperPrint.getPages().remove(1);
+  	      	// jasperPrint.getPages().remove(1);
 
             // Création du rapport au format PDF
             JasperExportManager.exportReportToPdfFile(jasperPrint, DEVIS_EXPORT_PATH+args[0]+".pdf");
