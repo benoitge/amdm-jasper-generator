@@ -21,6 +21,7 @@ public class DevisFactory {
 		// Adds the values in the bean and adds it into the collection
 		Devis devis = new Devis();
 		devis.setReference("20180306114401");
+		devis.setVersion(1);
 		devis.setPrenom("Gérald");
 		devis.setNom("BENOIT");
 		devis.setCrmAuto(0.5);
