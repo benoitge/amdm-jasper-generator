@@ -56,11 +56,11 @@
 			<scope>compile</scope>
 		</dependency> -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-fonts</artifactId>
 			<version>6.0.0</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Dependency added to solve the issue where lowagie itext 2.1.7.js6 is missing -->
 		<dependency>
